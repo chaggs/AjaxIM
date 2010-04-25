@@ -329,8 +329,10 @@ if($_SERVER['REQUEST_METHOD'] == 'POST') {
         $db_sql = explode(';', str_replace("\n", '', $db_sql[1]));
         
         $sql = new PDO('mysql:dbname=' . $_POST['mysqldb'] . ';host=' . $_POST['mysqlhost'], $_POST['mysqluser'], $_POST['mysqlpass']);
-        foreach($db_sql as $statement) {
-            $sql->exec(str_replace('ajaxim_', $_POST['mysqlprefix'], $statement));
+        foreach($db_sql as $statement) {t
+	    if(!empty($statement){
+            	$sql->exec(str_replace('ajaxim_', $_POST['mysqlprefix'], $statement));
+	    }
         }
     }
 ?>
