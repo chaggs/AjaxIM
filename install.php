@@ -330,7 +330,7 @@ if($_SERVER['REQUEST_METHOD'] == 'POST') {
         
         $sql = new PDO('mysql:dbname=' . $_POST['mysqldb'] . ';host=' . $_POST['mysqlhost'], $_POST['mysqluser'], $_POST['mysqlpass']);
         foreach($db_sql as $statement) {t
-	    if(!empty($statement){
+	    if(!empty($statement)){
             	$sql->exec(str_replace('ajaxim_', $_POST['mysqlprefix'], $statement));
 	    }
         }
