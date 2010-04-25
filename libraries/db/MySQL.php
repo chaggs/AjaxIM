@@ -35,6 +35,8 @@ class MySQL_User extends BaseUser {
         $this->user_id = $user_id;
         $this->ip = $ip;
         $this->last_login = $last_login;
+		
+		$this->autosave=true; //Added by me
     }
     
     public static function authenticate($username, $password) {

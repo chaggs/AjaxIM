@@ -1,0 +1,35 @@
+im.js
+	Line 119 to 134
+	Error : GET request to url was with parameters '?method=long?callback={something}'
+	Change : action[1] to action everywhere, so request was now '?method=long&callback={something}'
+
+
+	LINE 71:
+	cookieSession : 14,
+
+	var cookieObj = {};						cookieObj.user = self.username;						cookieObj.sid = auth.s;												self.cookies.set(self.settings.cookieName, cookieObj, self.settings.cookieSession);
+MYSQL_User
+	Line 139128
+	Error : Unknown 'autosave'
+	Change : Added $this->autosave=true; at line 38
+
+
+Default.PHP
+	Line 32
+	Error : Unknown index 'username'
+	changed to : if(isset($_SESSION['username'])) {
+
+	Line 231
+	Error : Maximum execution time of 30 secs exceeded
+	Change : Added a total time variable $total_time
+		$total_time = $start; (outside the do loop)
+
+		$sleep_time =  2.5 + min($no_msg_count * 1.5, 7.5);
+			$total_time = $total_time + $sleep_time;
+				if($total_time < 30)
+								sleep($sleep_time);
+
+		or set_time_limit : 40
+
+TODO : redirect in nginx
+im.js code has changed for line 	128

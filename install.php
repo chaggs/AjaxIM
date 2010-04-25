@@ -393,7 +393,7 @@ if($_SERVER['REQUEST_METHOD'] == 'POST') {
                 
                 <p>
                     <label for="url">What is the URL of the installation?</label>
-                    <input type="text" size="50" name="url" id="url" value="<?php print ($_SERVER['HTTPS'] ? 'https' : 'http') . '://' . $_SERVER['SERVER_NAME'] . str_replace('install.php', '', $_SERVER['REQUEST_URI']); ?>">
+                    <input type="text" size="50" name="url" id="url" value="<?php print (isset($_SERVER['HTTPS']) ? 'https' : 'http') . '://' . $_SERVER['SERVER_NAME'] . str_replace('install.php', '', $_SERVER['REQUEST_URI']); ?>">
                 </p>
                 
                 <p>

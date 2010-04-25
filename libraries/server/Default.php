@@ -29,7 +29,7 @@ class Default_IM extends IM {
         parent::__construct();
         
         session_start();
-        if($_SESSION['username']) {
+        if(isset($_SESSION['username'])) {
             $this->username = $_SESSION['username'];
             $this->user_id = $_SESSION['user_id'];
         }
@@ -62,11 +62,26 @@ class Default_IM extends IM {
     // === {{{Default_IM::}}}**{{{logout()}}}** ===
     //
     // Signs the user out.
-    public function logout() {
-        session_destroy();
-        $_SESSION = array();
-        
-        return array('r' => 'logged out');
+    public function logout() {	
+		if(session_destroy()){
+			$_SESSION = array(); 			
+			return array('r' => 'logged out');
+		}else{
+			return array('r' => 'error');
+		}
+    }
+	
+	// === {{{Default_IM::}}}**{{{resume()}}}** ===
+    //
+    // Resumes the session.
+    public function resume() 
+	{
+		if(!isset($this->username))
+		{           
+            return array('r' => 'error');
+        } else {
+			return array('r' => 'connected');
+        }
     }
     
     // === {{{Default_IM::}}}**{{{send($to, $message)}}}** ===
@@ -176,7 +191,7 @@ class Default_IM extends IM {
     // * {{{$method}}} is the type of response method to use as a reply.
     // See {{{im.js}}} for a description of each method.
     public function poll($method) {
-        if(!$this->username)
+        if(!isset($this->username))
             return array('r' => 'error', 'e' => 'no session found');
 
         session_write_close(); // prevents locking
@@ -215,7 +230,7 @@ class Default_IM extends IM {
     //
     // Use the long polling technique to check for and deliver new messages.
     private function _longPoll() {
-        set_time_limit(30);
+        set_time_limit(40);
         
         // We're going to keep a running tally of the number of times
         // we've checked for, but haven't received, messages. As that
